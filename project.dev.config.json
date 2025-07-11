@@ -1,0 +1,21 @@
+{
+  "appid": "wx6ffee4673b257014",
+  "condition": {
+    "miniprogram": {
+      "list": [
+        {
+          "pathName": "pages/home/index",
+          "name": "我的物品",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "pathName": "pages/category/index",
+          "name": "物品分类",
+          "launchMode": "default",
+          "scene": null
+        }
+      ]
+    }
+  }
+}

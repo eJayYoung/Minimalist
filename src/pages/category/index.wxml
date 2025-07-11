@@ -1,0 +1,17 @@
+<layout
+  currentTabBar="category"
+>
+  <view class="p-3 flex justify-between items-center">
+    <t-text>物品分类</t-text>
+    <t-button
+      size="extra-small"
+      theme="primary"
+      shape="round"
+      ghost
+      class="text-xs"
+      suffix="add"
+    >
+      添加分类
+    </t-button>
+  </view>
+</layout>

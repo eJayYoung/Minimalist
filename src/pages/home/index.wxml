@@ -1,0 +1,7 @@
+<layout
+  currentTabBar="home"
+>
+  <t-tabs defaultValue="{{0}}" theme="tag">
+    <t-tab-panel wx:for="{{tabs}}" wx:key="index" label="{{item.label}}" value="{{item.value}}" />
+  </t-tabs>
+</layout>

@@ -1,0 +1,24 @@
+<view class="p-3 border-b border-[#e5e5e5] border-opacity-50">
+  <t-search 
+    placeholder="搜索物品"
+    shape="round"
+  />
+</view>
+<slot></slot>
+<t-tab-bar 
+  t-class="t-tab-bar" 
+  value="{{currentTabBar}}" 
+  bindchange="handleTabClick" 
+  shape="round" 
+  theme="tag" 
+  split="{{false}}"
+>
+  <t-tab-bar-item
+    wx:for="{{tabbars}}"
+    wx:key="value"
+    value="{{item.value}}"
+    icon="{{item.icon}}"
+    ariaLabel="{{item.ariaLabel}}"
+  >
+  </t-tab-bar-item>
+</t-tab-bar>

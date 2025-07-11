@@ -1,0 +1,40 @@
+{
+  "name": "minimalist",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "极简物品，一个记录你身边物品的应用",
+  "author": "ejay young <ejay_young@163.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eJayYoung/Minimalist.git"
+  },
+  "bugs": {
+    "url": "https://github.com/eJayYoung/Minimalist/issues"
+  },
+  "keywords": [],
+  "scripts": {
+    "dev": "weapp-vite dev",
+    "dev:open": "weapp-vite dev -o",
+    "build": "weapp-vite build",
+    "open": "weapp-vite open",
+    "g": "weapp-vite generate",
+    "postinstall": "weapp-tw patch"
+  },
+  "dependencies": {
+    "tdesign-miniprogram": "^1.9.6"
+  },
+  "devDependencies": {
+    "@egoist/tailwindcss-icons": "^1.9.0",
+    "@iconify-json/mdi": "^1.2.3",
+    "autoprefixer": "^10.4.21",
+    "miniprogram-api-typings": "^4.0.7",
+    "postcss": "^8.5.6",
+    "sass": "^1.89.2",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.8.3",
+    "weapp-tailwindcss": "latest",
+    "weapp-vite": "5.0.8"
+  }
+}
