@@ -1,7 +1,116 @@
-<layout
-  currentTabBar="home"
->
-  <t-tabs defaultValue="{{0}}" theme="tag">
-    <t-tab-panel wx:for="{{tabs}}" wx:key="index" label="{{item.label}}" value="{{item.value}}" />
-  </t-tabs>
+<layout currentTabBar="home">
+  <!-- 搜索栏 -->
+  <view class="p-3 border-b border-[#e5e5e5] border-opacity-50 flex items-center gap-2">
+    <t-search 
+      placeholder="搜索物品"
+      shape="round"
+      value="{{searchKeyword}}"
+      bind:change="onSearchChange"
+      bind:clear="onSearchClear"
+      class="flex-1"
+    />
+    <t-button 
+      theme="primary" 
+      shape="circle"
+      icon="camera"
+      bind:tap="onCameraTap"
+    />
+  </view>
+
+  <!-- 分类标签 -->
+  <view class="p-3">
+    <t-tabs value="{{currentTab}}" bind:change="onTabChange" theme="tag">
+      <t-tab-panel wx:for="{{tabs}}" wx:key="value" label="{{item.label}}" value="{{item.value}}" />
+    </t-tabs>
+  </view>
+
+  <!-- 物品列表 -->
+  <scroll-view 
+    scroll-y 
+    class="item-list"
+    refresher-enabled
+    refresher-triggered="{{isRefreshing}}"
+    bind:refresherrefresh="onPullDownRefresh"
+    bind:scrolltolower="onLoadMore"
+  >
+    <view class="grid grid-cols-3 gap-3 p-3">
+      <view 
+        wx:for="{{filteredItems}}" 
+        wx:key="id" 
+        class="item-card bg-white rounded-lg overflow-hidden shadow-sm"
+      >
+        <image 
+          src="{{item.imageUrl}}" 
+          mode="aspectFill" 
+          class="w-full h-24"
+          lazy-load
+        />
+        <view class="p-2">
+          <view class="text-xs text-gray-500 mb-1">{{item.categoryLabel}}</view>
+          <view class="text-sm font-medium truncate">{{item.name}}</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 加载更多 -->
+    <view wx:if="{{isLoadingMore}}" class="py-4 text-center text-gray-400 text-sm">
+      加载中...
+    </view>
+    <view wx:if="{{!hasMore && filteredItems.length > 0}}" class="py-4 text-center text-gray-400 text-sm">
+      没有更多了
+    </view>
+
+    <!-- 空状态 -->
+    <view wx:if="{{filteredItems.length === 0 && !isRefreshing}}" class="py-12 text-center">
+      <t-icon name="image" size="48" class="text-gray-300" />
+      <view class="text-gray-400 mt-2 text-sm">暂无物品</view>
+    </view>
+  </scroll-view>
+
+  <!-- 添加物品弹窗 -->
+  <t-dialog
+    visible="{{showAddDialog}}"
+    title="添加物品"
+    confirm-btn="保存"
+    cancel-btn="取消"
+    bind:confirm="onSaveItem"
+    bind:cancel="onCancelAdd"
+  >
+    <view slot="content" class="py-4">
+      <!-- 图片预览 -->
+      <view class="mb-4">
+        <image 
+          wx:if="{{tempImageUrl}}"
+          src="{{tempImageUrl}}" 
+          mode="aspectFill" 
+          class="w-full h-40 rounded-lg"
+        />
+      </view>
+
+      <!-- 物品名称 -->
+      <view class="mb-4">
+        <view class="text-sm text-gray-600 mb-2">物品名称</view>
+        <t-input
+          placeholder="请输入物品名称"
+          value="{{newItemName}}"
+          bind:change="onItemNameChange"
+        />
+      </view>
+
+      <!-- 物品类型 -->
+      <view>
+        <view class="text-sm text-gray-600 mb-2">物品类型</view>
+        <t-radio-group value="{{newItemCategory}}" bind:change="onCategoryChange">
+          <view class="flex flex-wrap gap-2">
+            <t-radio 
+              wx:for="{{categoryOptions}}" 
+              wx:key="value"
+              value="{{item.value}}"
+              label="{{item.label}}"
+            />
+          </view>
+        </t-radio-group>
+      </view>
+    </view>
+  </t-dialog>
 </layout>
