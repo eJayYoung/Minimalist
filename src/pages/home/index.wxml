@@ -1,7 +1,93 @@
-<layout
-  currentTabBar="home"
->
-  <t-tabs defaultValue="{{0}}" theme="tag">
-    <t-tab-panel wx:for="{{tabs}}" wx:key="index" label="{{item.label}}" value="{{item.value}}" />
-  </t-tabs>
+<layout currentTabBar="home" bindsearch="handleSearch">
+  <view class="flex items-center justify-between px-3 py-2">
+    <t-tabs
+      defaultValue="{{currentTab}}"
+      theme="tag"
+      bindchange="handleTabChange"
+    >
+      <t-tab-panel
+        wx:for="{{tabs}}"
+        wx:key="value"
+        label="{{item.label}}"
+        value="{{item.value}}"
+      />
+    </t-tabs>
+    <t-button
+      size="small"
+      theme="primary"
+      shape="circle"
+      bindtap="handleCameraClick"
+      class="ml-3"
+    >
+      <t-icon name="add" size="40rpx" />
+    </t-button>
+  </view>
+
+  <scroll-view
+    scroll-y
+    class="flex-1 px-3"
+    refresher-enabled
+    refresher-triggered="{{isRefreshing}}"
+    bindrefresherrefresh="handleRefresh"
+  >
+    <view class="grid grid-cols-3 gap-3 py-3">
+      <view
+        wx:for="{{filteredItems}}"
+        wx:key="id"
+        class="bg-white rounded-lg overflow-hidden shadow-sm"
+        bindtap="handleItemClick"
+        data-id="{{item.id}}"
+      >
+        <image
+          src="{{item.image}}"
+          mode="aspectFill"
+          class="w-full h-32"
+        />
+        <view class="p-2">
+          <view class="text-xs text-gray-500 mb-1">{{item.typeLabel}}</view>
+          <view class="text-sm font-medium truncate">{{item.name}}</view>
+        </view>
+      </view>
+    </view>
+
+    <view wx:if="{{filteredItems.length === 0}}" class="flex flex-col items-center justify-center py-20">
+      <t-icon name="inbox" size="64rpx" color="#ccc" />
+      <text class="text-gray-400 mt-3">暂无物品</text>
+    </view>
+  </scroll-view>
+
+  <t-dialog
+    visible="{{showAddDialog}}"
+    title="添加物品"
+    confirm-btn="保存"
+    cancel-btn="取消"
+    bindconfirm="handleAddConfirm"
+    bindcancel="handleAddCancel"
+  >
+    <view class="p-4">
+      <view class="mb-4">
+        <view class="text-sm text-gray-600 mb-2">物品名称</view>
+        <t-input
+          value="{{newItem.name}}"
+          placeholder="请输入物品名称"
+          bindchange="handleNameChange"
+        />
+      </view>
+      <view>
+        <view class="text-sm text-gray-600 mb-2">物品类型</view>
+        <t-radio-group
+          value="{{newItem.type}}"
+          bindchange="handleTypeChange"
+        >
+          <t-radio
+            wx:for="{{typeOptions}}"
+            wx:key="value"
+            value="{{item.value}}"
+            label="{{item.label}}"
+            placement="left"
+          />
+        </t-radio-group>
+      </view>
+    </view>
+  </t-dialog>
 </layout>

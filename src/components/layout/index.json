@@ -2,5 +2,10 @@
   "$schema": "https://vite.icebreaker.top/component.json",
   "component": true,
   "styleIsolation": "apply-shared",
-  "navigationStyle": "custom"
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "t-search": "tdesign-miniprogram/search/search",
+    "t-tab-bar": "tdesign-miniprogram/tab-bar/tab-bar",
+    "t-tab-bar-item": "tdesign-miniprogram/tab-bar-item/tab-bar-item"
+  }
 }
