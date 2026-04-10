@@ -2,6 +2,9 @@
   <t-search 
     placeholder="搜索物品"
     shape="round"
+    value="{{searchValue}}"
+    bindchange="handleSearchChange"
+    bindsubmit="handleSearchSubmit"
   />
 </view>
 <slot></slot>
