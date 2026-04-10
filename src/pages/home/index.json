@@ -1,5 +1,6 @@
 {
   "$schema": "https://vite.icebreaker.top/page.json",
   "usingComponents": {},
-  "navigationBarTitleText": "我的物品"
+  "navigationBarTitleText": "我的物品",
+  "enablePullDownRefresh": false
 }

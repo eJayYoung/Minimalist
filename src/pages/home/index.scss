@@ -1,0 +1,11 @@
+.item-list {
+  height: calc(100vh - 200px);
+}
+
+.item-card {
+  transition: transform 0.2s ease;
+}
+
+.item-card:active {
+  transform: scale(0.98);
+}
