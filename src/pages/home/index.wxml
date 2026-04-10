@@ -4,7 +4,6 @@
       defaultValue="{{currentTab}}"
       theme="tag"
       bindchange="handleTabChange"
-      class="flex-1"
     >
       <t-tab-panel
         wx:for="{{tabs}}"
@@ -18,7 +17,7 @@
       theme="primary"
       shape="circle"
       bindtap="handleCameraClick"
-      class="ml-2"
+      class="ml-3"
     >
       <t-icon name="add" size="40rpx" />
     </t-button>
